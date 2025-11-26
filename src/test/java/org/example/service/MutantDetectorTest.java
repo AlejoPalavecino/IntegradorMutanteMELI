@@ -174,11 +174,14 @@ class MutantDetectorTest {
 		for (int i = 0; i < size; i++) {
 			char[] row = new char[size];
 			for (int j = 0; j < size; j++) {
-				row[j] = bases[(i + j) % bases.length];
+				row[j] = bases[(i * 2 + j) % bases.length]; // Patrón determinista que evita 4 iguales consecutivas
 			}
 			dna[i] = new String(row);
 		}
-		assertFalse(detector.isMutant(dna));
+		long start = System.nanoTime();
+		boolean result = detector.isMutant(dna);
+		long duration = System.nanoTime() - start;
+		assertFalse(result, "No debe detectar mutantes en matriz grande. Tiempo(ns): " + duration);
 	}
 
 	@Test
