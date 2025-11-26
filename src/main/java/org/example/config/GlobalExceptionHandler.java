@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String, String>> handleGeneric(Exception ex) {
 		Map<String, String> error = new HashMap<>();
 		error.put("error", "Error interno del servidor");
+        ex.printStackTrace();
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
 	}
 }
